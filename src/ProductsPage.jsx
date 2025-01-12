@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProductCard from './ProductCard';
 
 export default function ProductPage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/products.json');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <div className="container mt-5">
@@ -9,39 +25,20 @@ export default function ProductPage() {
         <p>This is where we'll display our product catalog.</p>
       </div>
 
+      <div className="container my-5">
+      <h1 className="text-center mb-4">Our Products</h1>
       <div className="row">
-        <div className="col-md-3 mb-4">
-          <ProductCard
-            imageUrl="https://picsum.photos/id/20/300/200"
-            productName="Product 1"
-            price="19.99"
-          />
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <ProductCard
-            imageUrl="https://picsum.photos/id/1/300/200"
-            productName="Product 2"
-            price="29.99"
-          />
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <ProductCard
-            imageUrl="https://picsum.photos/id/26/300/200"
-            productName="Product 3"
-            price="39.99"
-          />
-        </div>
-
-        <div className="col-md-3 mb-4">
-          <ProductCard
-            imageUrl="https://picsum.photos/id/96/300/200"
-            productName="Product 4"
-            price="49.99"
-          />
-        </div>
+        {products.map(product => (
+          <div key={product.id} className="col-md-4 mb-4">
+            <ProductCard
+              imageUrl={product.image}
+              productName={product.name}
+              price={product.price.toFixed(2)}
+            />
+          </div>
+        ))}
       </div>
+    </div>
     </>
 
   )

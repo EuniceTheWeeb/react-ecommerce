@@ -7,7 +7,7 @@ import Footer from './Footer';
 import ProductsPage from './ProductsPage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
-import RegisterPage from './RegisterPage';
+// import RegisterPage from './RegisterPage';
 
 export default function App() {
   return (
@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/products" component={ProductsPage} />
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={ContactPage} />
-        <Route path="/register" component={RegisterPage} />
+        {/* <Route path="/register" component={RegisterPage} /> */}
       </Switch>
 
       <Footer />

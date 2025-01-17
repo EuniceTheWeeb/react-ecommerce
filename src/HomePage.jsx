@@ -35,6 +35,7 @@ export default function HomePage() {
         return productElements;
     };
 
+    // TODO: turn hero banner into carousel, move featured products here
     return (
         <>
             <header className="bg-primary text-white text-center py-5">

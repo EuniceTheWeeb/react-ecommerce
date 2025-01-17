@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-// import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 
 export default function Navbar() {
@@ -10,6 +9,10 @@ export default function Navbar() {
   const toggleNavbar = () => {
     setNavbarShowing(!isNavbarShowing);
   };
+
+  useEffect(() => {
+    setNavbarShowing(false); // Collapse the navbar when the route changes
+  }, [location]);
 
   // Sync the collapse state with screen size
   // useEffect(() => {
@@ -43,7 +46,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className={`collapse navbar-collapse ${isNavbarShowing ? "show" : ""}`} id="navbarNav">
+        <div className={`collapse navbar-collapse ${isNavbarShowing ? 'show' : ''}`} id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link href="/" className={`nav-link ${location === '/' ? 'active' : ''}`}>
@@ -63,8 +66,15 @@ export default function Navbar() {
             <li className="nav-item">
               <Link
                 href="/register"
-                className={`nav-link btn btn-primary text-white ${location === '/register' ? 'active' : ''}`}>
+                className={`nav-link ${location === '/register' ? 'active' : ''}`}>
                 Register
+              </Link>
+            </li>
+              <li className="nav-item">
+              <Link 
+              href="/cart" 
+              className={`nav-link ${location === '/cart' ? 'active' : ''}`}>
+                Cart
               </Link>
             </li>
           </ul>

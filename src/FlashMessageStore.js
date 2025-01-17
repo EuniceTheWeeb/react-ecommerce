@@ -10,6 +10,7 @@ export const useFlashMessage = () => {
 
 
     const showMessage = (message, type = 'info') => {
+        console.log('showMessage called with:', message, type);  // Debugging log
         setFlashMessage({ message, type });
     };
 

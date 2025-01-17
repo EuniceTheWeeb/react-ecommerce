@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFlashMessage } from './FlashMessageStore';
 
+// TODO: addToCart works on product page but not home page
 export default function ProductCard(props) {
     const { showMessage } = useFlashMessage();
-
-
+  
     const handleAddToCart = () => {
-        showMessage(`Added ${props.productName} to cart!`, 'success')
-    }
+        props.onAddToCart();
+
+        // TODO: try-catch for success & failure (sold out products?)
+        showMessage(`Added ${props.productName} to cart!`, 'success');
+      };
 
     return (
         <div className="card">
@@ -19,9 +22,9 @@ export default function ProductCard(props) {
             <div className="card-body">
                 <h5 className="card-title">{props.productName}</h5>
                 <p className="card-text">${props.price}</p>
-                <button className="btn btn-primary" onClick={handleAddToCart}>
-                    Add to Cart
-                </button>
+                <a href="#" className="btn btn-primary" onClick={() => {
+                    handleAddToCart();
+                }}>Add to Cart</a>
             </div>
         </div>
     );

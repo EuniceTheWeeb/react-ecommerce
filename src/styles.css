@@ -7,11 +7,39 @@
   position: relative;
 }
 
+/* TODO: alerts stopped working */
+/* TODO: different types of alerts (success, failed, product removed) */
 .flash-alert {
-    animation: fadeOut 10s ease forwards;
+    animation: fadeOut 2s ease forwards;
     position: fixed;
-    top: 10px;
-    z-index: 99999;
+    top: 20px;
+    z-index: 10;
+    padding: 12px;
+
+    min-width: auto;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+
+  .flash-alert.hide {
+    opacity: 0;
+    transform: translateY(20px); /* Move the toast down when hiding */
+    visibility: hidden;
+  }
+  
+  .flash-alert.success {
+    background-color: #28a745; /* Green background for success */
+  }
+  
+  .flash-alert.error {
+    background-color: #dc3545; /* Red background for error */
+  }
+  
+  .flash-alert.info {
+    background-color: #17a2b8; /* Blue background for info */
   }
   
   @keyframes fadeOut {

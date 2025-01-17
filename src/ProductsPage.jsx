@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
+import { useCart } from './CartStore';
+import { useLocation } from 'wouter';
+import { useFlashMessage } from './FlashMessageStore';
 
 export default function ProductPage() {
   const [products, setProducts] = useState([]);
+  const { addToCart } = useCart();
+  const [, setLocation] = useLocation();
+  const { showMessage } = useFlashMessage();
+
+  const handleAddToCart = (product) => {
+    addToCart({
+      product_id: product.id,
+      productName: product.name,
+      imageUrl: product.image,
+      price: product.price,
+      description: product.description
+    });
+    showMessage(`Added ${props.productName} to cart!`, 'success');
+    setLocation('/cart');
+  }
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -20,25 +38,22 @@ export default function ProductPage() {
 
   return (
     <>
-      <div className="container mt-5">
-        <h1>Our Products</h1>
-        <p>This is where we'll display our product catalog.</p>
-      </div>
-
       <div className="container my-5">
-      <h1 className="text-center mb-4">Our Products</h1>
-      <div className="row">
-        {products.map(product => (
-          <div key={product.id} className="col-md-4 mb-4">
-            <ProductCard
-              imageUrl={product.image}
-              productName={product.name}
-              price={product.price.toFixed(2)}
-            />
-          </div>
-        ))}
+        <h1 className="text-center mb-4">Our Products</h1>
+        <div className="row">
+          {products.map(product => (
+            <div key={product.id} className="col-md-4 mb-4">
+              <ProductCard
+                imageUrl={product.image}
+                productName={product.name}
+                price={product.price.toFixed(2)}
+                onAddToCart={() => handleAddToCart(product)}
+                setLocation={setLocation}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </>
 
   )

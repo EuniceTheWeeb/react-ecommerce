@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useFlashMessage } from './FlashMessageStore';
 
 export default function ProductCard(props) {
+    const { showMessage } = useFlashMessage();
+
+
     const handleAddToCart = () => {
-        alert("Added to Cart!");
-    };
+        showMessage(`Added ${props.productName} to cart!`, 'success')
+    }
 
     return (
         <div className="card">

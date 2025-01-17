@@ -1,94 +1,140 @@
-import React from "react";
-import { Formik, Field, Form } from 'formik';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Formik, Field, Form } from "formik";
+import * as Yup from "yup";
+import { useLocation } from 'wouter';
+import { useFlashMessage } from './FlashMessageStore';
+// import axios from 'axios';
+// Setup Express Backend (Part 6, Step 6)
 
 export default function RegisterPage() {
+    const { showMessage } = useFlashMessage();
+
     const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        salutation: '',
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        salutation: "",
         marketingPreferences: [],
-        country: ''
+        country: "",
+    };    
+
+    const [, setLocation] = useLocation();
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [loading, setLoading] = useState(false);  // Add a loading state
+
+
+    // Here you would typically make an API call to register the user
+    const handleSubmit = async (values, formikHelpers) => {
+        setErrorMessage(null);
+        setLoading(true);
+
+        try {
+            console.log('Registration successful:', values);
+            showMessage('Registration successful!', 'success');
+
+            // Handle successful registration (e.g., show success message, redirect)
+                setShowSuccess(true);
+                formikHelpers.resetForm();
+                setLocation("/");
+
+        } catch (error) {
+            // Handle registration error (e.g., show error message)
+            console.log(values)
+            console.log("Registration failed:", error);
+            showMessage('Registration failed. Please try again.', 'error');
+
+        } finally {
+            formikHelpers.setSubmitting(false);
+            setLoading(false);
+        }
     };
 
-    const handleSubmit = (values, formikHelpers) => {
-        // Here you would typically make an API call to register the user
-        console.log('Form values:', values);
-        formikHelpers.setSubmitting(false);
-    };
 
     const validationSchema = Yup.object({
-        name: Yup.string().required('Name is required'),
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+        name: Yup.string().required("Required field"),
+        email: Yup.string().email("Invalid email address").required("Required field"),
+        password: Yup.string().min(8, "Password must be at least 8 characters").required("Required field"),
         confirmPassword: Yup.string()
-          .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          .required('Confirm Password is required'),
-        salutation: Yup.string().required('Salutation is required'),
-        country: Yup.string().required('Country is required'),
-      });
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
+            .required("Required field"),
+        salutation: Yup.string().required("Required field"),
+        country: Yup.string().required("Required field"),
+        marketingPreferences: Yup.array(),
+    });
 
     return (
         <>
-            <div className="container mt-5">
-                <p>This is where users can create a new account.</p>
-            </div>
-
             <div className="container mt-5">
                 <h1>Register</h1>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
+                    enableReinitialize={true}
                 >
                     {(formik) => (
                         <Form>
                             <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Name</label>
+                                <label htmlFor="name" className="form-label">
+                                    Name
+                                </label>
                                 <Field
                                     type="text"
                                     className="form-control"
                                     id="name"
                                     name="name"
                                 />
+                                {formik.errors.name && formik.touched.name ? (
+                                    <div className="text-danger">{formik.errors.name}</div>
+                                ) : null}
                             </div>
-                            {formik.errors.name && formik.touched.name ? <div className="text-danger">{formik.errors.name}</div> : null}
 
                             <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email</label>
+                                <label htmlFor="email" className="form-label">
+                                    Email
+                                </label>
                                 <Field
                                     type="email"
                                     className="form-control"
                                     id="email"
                                     name="email"
                                 />
+                                {formik.errors.email && formik.touched.email ? (
+                                    <div className="text-danger">{formik.errors.email}</div>
+                                ) : null}
                             </div>
-                            {formik.errors.email && formik.touched.email ? <div className="text-danger">{formik.errors.email}</div> : null}
 
                             <div className="mb-3">
-                                <label htmlFor="password" className="form-label">Password</label>
+                                <label htmlFor="password" className="form-label">
+                                    Password
+                                </label>
                                 <Field
                                     type="password"
                                     className="form-control"
                                     id="password"
                                     name="password"
                                 />
+                                {formik.errors.password && formik.touched.password ? (
+                                    <div className="text-danger">{formik.errors.password}</div>
+                                ) : null}
                             </div>
-                            {formik.errors.password && formik.touched.password ? <div className="text-danger">{formik.errors.password}</div> : null}
 
                             <div className="mb-3">
-                                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                                <label htmlFor="confirmPassword" className="form-label">
+                                    Confirm Password
+                                </label>
                                 <Field
                                     type="password"
                                     className="form-control"
                                     id="confirmPassword"
                                     name="confirmPassword"
                                 />
+                                {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
+                                    <div className="text-danger">{formik.errors.confirmPassword}</div>
+                                ) : null}
                             </div>
-                            {formik.errors.confirmPassword && formik.touched.confirmPassword ? <div className="text-danger">
-                                {formik.errors.confirmPassword}</div> : null}
 
                             <div className="mb-3">
                                 <label className="form-label">Salutation</label>
@@ -101,7 +147,9 @@ export default function RegisterPage() {
                                             id="mr"
                                             value="Mr"
                                         />
-                                        <label className="form-check-label" htmlFor="mr">Mr</label>
+                                        <label className="form-check-label" htmlFor="mr">
+                                            Mr
+                                        </label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <Field
@@ -111,7 +159,9 @@ export default function RegisterPage() {
                                             id="ms"
                                             value="Ms"
                                         />
-                                        <label className="form-check-label" htmlFor="ms">Ms</label>
+                                        <label className="form-check-label" htmlFor="ms">
+                                            Ms
+                                        </label>
                                     </div>
                                     <div className="form-check form-check-inline">
                                         <Field
@@ -121,11 +171,15 @@ export default function RegisterPage() {
                                             id="mrs"
                                             value="Mrs"
                                         />
-                                        <label className="form-check-label" htmlFor="mrs">Mrs</label>
+                                        <label className="form-check-label" htmlFor="mrs">
+                                            Mrs
+                                        </label>
                                     </div>
                                 </div>
+                                {formik.errors.salutation && formik.touched.salutation ? (
+                                    <div className="text-danger">{formik.errors.salutation}</div>
+                                ) : null}
                             </div>
-
 
                             <div className="mb-3">
                                 <label className="form-label">Marketing Preferences</label>
@@ -153,10 +207,16 @@ export default function RegisterPage() {
                                         SMS Marketing
                                     </label>
                                 </div>
+                                {formik.errors.marketingPreferences &&
+                                    formik.touched.marketingPreferences ? (
+                                    <div className="text-danger">{formik.errors.marketingPreferences}</div>
+                                ) : null}
                             </div>
 
                             <div className="mb-3">
-                                <label htmlFor="country" className="form-label">Country</label>
+                                <label htmlFor="country" className="form-label">
+                                    Country
+                                </label>
                                 <Field
                                     as="select"
                                     className="form-select"
@@ -169,6 +229,9 @@ export default function RegisterPage() {
                                     <option value="in">Indonesia</option>
                                     <option value="th">Thailand</option>
                                 </Field>
+                                {formik.errors.country && formik.touched.country ? (
+                                    <div className="text-danger">{formik.errors.country}</div>
+                                ) : null}
                             </div>
 
                             <button
@@ -176,12 +239,21 @@ export default function RegisterPage() {
                                 className="btn btn-primary"
                                 disabled={formik.isSubmitting}
                             >
-                                Register
-                            </button>
+                                Register</button>
+
+                            {loading && (
+                                <div className="spinner-border text-primary ms-2" role="status">
+                                    <span className="visually-hidden">Loading...</span>
+                                </div>
+                            )}
                         </Form>
                     )}
                 </Formik>
+
+                {showSuccess && <div className="alert alert-success">Registration Successful!</div>}
+                {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+
             </div>
         </>
-    )
+    );
 }

@@ -30,7 +30,11 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="#">E-Shop</a>
+        <a className="navbar-brand" href="#">
+          <Link href="/" className={`nav-link ${location === '/' ? 'active' : ''}`}>
+            E-Shop
+          </Link>
+        </a>
         <button
           className="navbar-toggler"
           type="button"
@@ -49,11 +53,6 @@ export default function Navbar() {
             <li className="nav-item">
               <Link href="/products" className={`nav-link ${location === '/products' ? 'active' : ''}`}>
                 Products
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/about" className={`nav-link ${location === '/about' ? 'active' : ''}`}>
-                About
               </Link>
             </li>
             <li className="nav-item">

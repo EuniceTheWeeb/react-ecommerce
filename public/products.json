@@ -33,5 +33,12 @@
       "price": 39.99,
       "image": "https://picsum.photos/id/180/300/200",
       "description": "Portable solar charger with dual USB ports. Ideal for outdoor activities and emergency preparedness."
+    },
+    {
+      "id": 6,
+      "name": "HD Action Camera",
+      "price": 129.99,
+      "image": "https://picsum.photos/id/96/300/200",
+      "description": "Digital camera with 2 portable microphones. Comes with settings suitable for beginners."
     }
   ]

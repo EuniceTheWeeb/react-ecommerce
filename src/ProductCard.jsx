@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFlashMessage } from './FlashMessageStore';
 
-// TODO: addToCart works on product page but not home page
 export default function ProductCard(props) {
     const { showMessage } = useFlashMessage();
   

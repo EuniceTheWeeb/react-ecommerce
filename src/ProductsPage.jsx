@@ -12,16 +12,25 @@ export default function ProductPage() {
   const { showMessage } = useFlashMessage();
 
   const handleAddToCart = (product) => {
-    addToCart({
-      product_id: product.id,
-      productName: product.name,
-      imageUrl: product.image,
-      price: product.price,
-      description: product.description
-    });
-    showMessage(`Added ${props.productName} to cart!`, 'success');
-    setLocation('/cart');
-  }
+    try {
+
+      addToCart({
+        product_id: product.id,
+        productName: product.name,
+        imageUrl: product.image,
+        price: product.price,
+        description: product.description
+      });
+
+      showMessage(`Added ${product.name} to cart!`, 'success');
+    } catch (error) {
+
+      console.error("Error adding product to cart:", error);
+      showMessage(`Failed to add ${product.name} to cart. Please try again.`, 'danger');
+      setLocation('/cart');
+    }
+  };
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -48,13 +57,12 @@ export default function ProductPage() {
                 productName={product.name}
                 price={product.price.toFixed(2)}
                 onAddToCart={() => handleAddToCart(product)}
-                setLocation={setLocation}
+              // setLocation={setLocation}
               />
             </div>
           ))}
         </div>
       </div>
     </>
-
   )
 }

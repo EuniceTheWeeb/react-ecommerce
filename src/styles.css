@@ -24,23 +24,23 @@
     opacity: 1;
   }
 
-  .flash-alert.hide {
+  /* .flash-alert.hide {
     opacity: 0;
-    transform: translateY(20px); /* Move the toast down when hiding */
+    transform: translateY(20px);
     visibility: hidden;
-  }
+    } */
   
-  .flash-alert.success {
-    background-color: #28a745; /* Green background for success */
+  /* .flash-alert.success {
+    background-color: #28a745;
   }
   
   .flash-alert.error {
-    background-color: #dc3545; /* Red background for error */
+    background-color: #dc3545;
   }
   
   .flash-alert.info {
-    background-color: #17a2b8; /* Blue background for info */
-  }
+    background-color: #17a2b8;
+  } */
   
   @keyframes fadeOut {
     0% { opacity: 1; }

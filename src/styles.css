@@ -7,7 +7,6 @@
   position: relative;
 }
 
-/* TODO: alerts stopped working */
 /* TODO: different types of alerts (success, failed, product removed) */
 .flash-alert {
     animation: fadeOut 2s ease forwards;

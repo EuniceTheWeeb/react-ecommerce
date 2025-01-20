@@ -7,7 +7,6 @@ import HomePage from './HomePage';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ProductsPage from './ProductsPage';
-import ContactPage from './ContactPage';
 import RegisterPage from './RegisterPage';
 import ShoppingCart from './ShoppingCart';
 
@@ -46,7 +45,6 @@ export default function App() {
       <Switch>
         <Route path="/" component={HomePage} />
         <Route path="/products" component={ProductsPage} />
-        <Route path="/contact" component={ContactPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/cart" component={ShoppingCart} />
       </Switch>
@@ -55,4 +53,3 @@ export default function App() {
     </>
   );
 }
-// TODO: contact page optional

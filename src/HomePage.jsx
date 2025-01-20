@@ -2,13 +2,34 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { useCart } from './CartStore';
+import { useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 
 export default function HomePage() {
     const [featuredProducts, setFeaturedProducts] = useState([]);
     const { showMessage } = useFlashMessage();
-  const { addToCart } = useCart();
+      const [, setLocation] = useLocation();
+    const { addToCart } = useCart();
 
+    const handleAddToCart = (productId) => {
+        const product = featuredProducts.find((item) => item.id === productId);
+        try {
+            addToCart({
+                product_id: product.id,
+                productName: product.name,
+                imageUrl: product.image,
+                price: product.price,
+                description: product.description
+              });
+            showMessage(`Added ${product.name} to cart!`, 'success');
+            console.log(`Added ${product.name} to cart.`);
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+            showMessage(`Failed to add ${product.name} to cart. Please try again.`, 'danger');
+            setLocation('/cart');
+        }
+    };
+    
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
             try {
@@ -22,23 +43,6 @@ export default function HomePage() {
     }, []);
 
 
-    const handleAddToCart = (productId) => {
-        const product = featuredProducts.find((item) => item.id === productId);
-        if (product) {
-            addToCart({
-                product_id: product.id,
-                productName: product.name,
-                imageUrl: product.image,
-                price: product.price,
-                description: product.description
-              });
-            showMessage(`Added ${product.name} to cart!`, 'success');
-            console.log(`Added ${product.name} to cart.`);
-        } else {
-            console.error('Product not found.');
-            showMessage(`Failed to add ${product.name} to cart. Please try again.`, 'danger');
-        }
-    };
 
     const renderFeaturedProducts = () => {
         return featuredProducts.map((product) => (

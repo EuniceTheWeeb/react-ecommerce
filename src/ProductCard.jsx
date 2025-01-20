@@ -7,7 +7,8 @@ export default function ProductCard(props) {
     const handleAddToCart = () => {
         props.onAddToCart();
 
-        // TODO: try-catch for success & failure (sold out products?)
+        
+        // TODO: if-else for success & failure (sold out products) + styling for sold out
         showMessage(`Added ${props.productName} to cart!`, 'success');
       };
 

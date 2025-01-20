@@ -13,7 +13,6 @@ export default function ProductPage() {
 
   const handleAddToCart = (product) => {
     try {
-
       addToCart({
         product_id: product.id,
         productName: product.name,
@@ -23,6 +22,7 @@ export default function ProductPage() {
       });
 
       showMessage(`Added ${product.name} to cart!`, 'success');
+      console.log(`Added ${product.name} to cart.`);
     } catch (error) {
 
       console.error("Error adding product to cart:", error);
@@ -41,7 +41,6 @@ export default function ProductPage() {
         console.error('Error fetching products:', error);
       }
     };
-
     fetchProducts();
   }, []);
 

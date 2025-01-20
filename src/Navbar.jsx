@@ -59,11 +59,6 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/contact" className={`nav-link ${location === '/contact' ? 'active' : ''}`}>
-                Contact
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link
                 href="/register"
                 className={`nav-link ${location === '/register' ? 'active' : ''}`}>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { useCart } from './CartStore';
+import { useFlashMessage } from './FlashMessageStore';
 
 const ShoppingCart = () => {
   const { cart, getCartTotal, modifyQuantity, removeFromCart } = useCart();
+  const { showMessage } = useFlashMessage();
 
   return (
     <div className="container mt-4">
@@ -29,7 +31,11 @@ const ShoppingCart = () => {
                     <button className="btn btn-sm btn-secondary ms-2"
                       onClick={() => modifyQuantity(item.product_id, item.quantity + 1)}>
                       +</button>
-                    <button className="btn btn-sm btn-danger ms-2" onClick={() => removeFromCart(item.product_id)}>Remove</button>
+                    <button className="btn btn-sm btn-danger ms-2" onClick={() => {
+                      removeFromCart(item.product_id);
+                      showMessage(`Removed ${item.productName} from cart!`, 'danger');
+                    }}
+                    >Remove</button>
 
                   </div>
                 </div>

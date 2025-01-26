@@ -44,8 +44,8 @@ export default function App() {
 
       <Switch>
         <Route path="/" component={HomePage} />
-        <Route path="/products" component={ProductsPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/products" component={ProductsPage} />
         <Route path="/cart" component={ShoppingCart} />
       </Switch>
 

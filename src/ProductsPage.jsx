@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard';
 import { useCart } from './CartStore';
-import { useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
 
 export default function ProductPage() {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
-  const [, setLocation] = useLocation();
   const { showMessage } = useFlashMessage();
 
   const handleAddToCart = (product) => {
@@ -27,10 +25,8 @@ export default function ProductPage() {
 
       console.error("Error adding product to cart:", error);
       showMessage(`Failed to add ${product.name} to cart. Please try again.`, 'danger');
-      setLocation('/cart');
     }
   };
-
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -56,7 +52,6 @@ export default function ProductPage() {
                 productName={product.name}
                 price={product.price.toFixed(2)}
                 onAddToCart={() => handleAddToCart(product)}
-              // setLocation={setLocation}
               />
             </div>
           ))}

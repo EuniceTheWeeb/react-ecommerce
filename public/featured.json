@@ -1,20 +1,23 @@
 [
     {
-      "id": 11,
-      "name": "Sleek Smartwatch",
-      "price": 199.99,
-      "image": "https://picsum.photos/id/20/300/200"
+      "id": 101,
+      "name": "Prosperity Yusheng (4-6 pax)",
+      "price": 28.80,
+      "image": "yusheng1.jpg",
+      "description": "Specially curated Prosperity Yusheng in a colourful medley of 18 ingredients."
     },
     {
-      "id": 12,
-      "name": "Wireless Earbuds",
-      "price": 79.99,
-      "image": "https://picsum.photos/id/1/300/200"
+      "id": 102,
+      "name": "Bountiful Yusheng (7-10 pax)",
+      "price": 45.80,
+      "image": "yusheng2.jpg",
+      "description": "Lo Hei with your family to a brand new year of abundance & happiness!"
     },
     {
-      "id": 13,
-      "name": "Portable Power Bank",
-      "price": 49.99,
-      "image": "https://picsum.photos/id/26/300/200"
+      "id": 103,
+      "name": "Fortune Yusheng (11-15 pax)",
+      "price": 70.80,
+      "image": "yusheng3.jpg",
+      "description": "Yusheng laid out in the shape of a dragon to bring maximum fortune!"
     }
   ]

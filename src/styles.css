@@ -7,7 +7,12 @@
   position: relative;
 }
 
-/* TODO: different types of alerts (success, failed, product removed) */
+img {
+  width: 100px;
+  height: auto;
+}
+
+/* TODO: different types of alerts (success, failed) */
 .flash-alert {
     animation: fadeOut 2s ease forwards;
     position: fixed;
@@ -23,17 +28,12 @@
     opacity: 1;
   }
 
-  /* .flash-alert.hide {
-    opacity: 0;
-    transform: translateY(20px);
-    visibility: hidden;
-    } */
-  
-  /* .flash-alert.success {
+/*   
+  .flash-alert.success {
     background-color: #28a745;
   }
   
-  .flash-alert.error {
+  .flash-alert.danger {
     background-color: #dc3545;
   }
   
@@ -43,6 +43,6 @@
   
   @keyframes fadeOut {
     0% { opacity: 1; }
-    70% { opacity: 1; } /* Stay fully visible for the first 70% of time */
+    70% { opacity: 1; }
     100% { opacity: 0; }
   }

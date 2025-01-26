@@ -54,15 +54,15 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/products" className={`nav-link ${location === '/products' ? 'active' : ''}`}>
-                Products
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link
                 href="/register"
                 className={`nav-link ${location === '/register' ? 'active' : ''}`}>
                 Register
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/products" className={`nav-link ${location === '/products' ? 'active' : ''}`}>
+                Products
               </Link>
             </li>
               <li className="nav-item">

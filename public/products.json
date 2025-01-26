@@ -1,45 +1,44 @@
 [
   {
     "id": 1,
-    "name": "Organic Green Tea",
-    "price": 12.99,
-    "image": "https://picsum.photos/id/225/300/200",
-    "description": "Premium organic green tea leaves, rich in antioxidants and offering a smooth, refreshing taste."
+    "name": "Pineapple Tarts (Bottle)",
+    "price": 21.90,
+    "image": "pineappleTarts.jpg",
+    "description": "Our pineapple tarts melt in your mouth with the perfect balance of sweet and tangy."
   },
-
     {
       "id": 2,
-      "name": "Bamboo Cutting Board",
-      "price": 19.99,
-      "image": "https://picsum.photos/id/292/300/200",
-      "description": "Durable and sustainable bamboo cutting board with juice groove. Perfect for meal prep and serving."
+      "name": "Bakkwa (1kg)",
+      "price": 25.90,
+      "image": "bakkwa.jpg",
+      "description": "Lovingly made from premium pork hind leg, marinated with our secret recipe and barbecued to perfection."
     },
     {
       "id": 3,
-      "name": "Stainless Steel Water Bottle",
-      "price": 24.99,
-      "image": "https://picsum.photos/id/28/300/200",
-      "description": "Eco-friendly, double-walled insulated water bottle. Keeps drinks cold for 24 hours or hot for 12 hours."
+      "name": "Love Letter Egg Roll Style (Bottle)",
+      "price": 16.80,
+      "image": "loveLetters.jpg",
+      "description": "A traditional festive treat – light & crisp egg rolls with aromatic hints of coconut and sesame."
     },
     {
       "id": 4,
-      "name": "Reusable Produce Bags",
-      "price": 15.99,
-      "image": "https://picsum.photos/id/292/300/200",
-      "description": "Set of 5 mesh produce bags. Washable and perfect for grocery shopping and storing fruits and vegetables."
+      "name": "Kueh Bahulu (Bottle)",
+      "price": 12.80,
+      "image": "Bahulu.jpeg",
+      "description": "A simple light, fluffy sponge cake with a delightful aroma and a crusty exterior, browned to a golden perfection."
     },
     {
       "id": 5,
-      "name": "Solar-Powered Charger",
-      "price": 39.99,
-      "image": "https://picsum.photos/id/180/300/200",
-      "description": "Portable solar charger with dual USB ports. Ideal for outdoor activities and emergency preparedness."
+      "name": "Kueh lapis (Box)",
+      "price": 38.80,
+      "image": "kuehLapis.jpg",
+      "description": "Our exclusive lapis cake is handmade layer by layer. Rich buttery taste, yet light on the palate."
     },
     {
       "id": 6,
-      "name": "HD Action Camera",
-      "price": 129.99,
-      "image": "https://picsum.photos/id/96/300/200",
-      "description": "Digital camera with 2 portable microphones. Comes with settings suitable for beginners."
+      "name": "Mini Shrimp Rolls (Bottle)",
+      "price": 18.80,
+      "image": "springRolls.jpg",
+      "description": "Our prawn rolls are generously filled with savoury dried shrimps fully wrapped in an extra crispy crust."
     }
   ]

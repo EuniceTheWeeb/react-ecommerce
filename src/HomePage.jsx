@@ -7,9 +7,9 @@ import { useFlashMessage } from './FlashMessageStore';
 
 export default function HomePage() {
     const [featuredProducts, setFeaturedProducts] = useState([]);
-    const { showMessage } = useFlashMessage();
-      const [, setLocation] = useLocation();
     const { addToCart } = useCart();
+    const [, setLocation, location] = useLocation();
+    const { showMessage } = useFlashMessage();
 
     const handleAddToCart = (productId) => {
         const product = featuredProducts.find((item) => item.id === productId);
@@ -21,12 +21,12 @@ export default function HomePage() {
                 price: product.price,
                 description: product.description
               });
+
             showMessage(`Added ${product.name} to cart!`, 'success');
             console.log(`Added ${product.name} to cart.`);
         } catch (error) {
             console.error("Error adding product to cart:", error);
             showMessage(`Failed to add ${product.name} to cart. Please try again.`, 'danger');
-            setLocation('/cart');
         }
     };
     
@@ -41,8 +41,6 @@ export default function HomePage() {
         };
         fetchFeaturedProducts();
     }, []);
-
-
 
     const renderFeaturedProducts = () => {
         return featuredProducts.map((product) => (
@@ -62,9 +60,12 @@ export default function HomePage() {
         <>
             <header className="bg-primary text-white text-center py-5">
                 <div className="container">
-                    <h1 className="display-4">Welcome to E-Shop</h1>
+                    <h1 className="display-4">Ring in the New Year with our delicious snacks!</h1>
                     <p className="lead">Discover amazing products at unbeatable prices!</p>
-                    <a href="#" className="btn btn-light btn-lg">Shop Now</a>
+                    <a onClick={() => setLocation('/products')}
+                        className={`btn btn-light btn-lg nav-link ${location === '/products' ? 'active' : ''}`}
+                        role="button">
+                        Shop Now</a>
                 </div>
             </header>
 

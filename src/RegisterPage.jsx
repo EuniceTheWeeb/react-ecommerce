@@ -3,8 +3,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { useLocation } from 'wouter';
 import { useFlashMessage } from './FlashMessageStore';
-// import axios from 'axios';
-// Setup Express Backend (Part 6, Step 6)
+import axios from 'axios';
 
 export default function RegisterPage() {
     const { showMessage } = useFlashMessage();
@@ -21,25 +20,24 @@ export default function RegisterPage() {
 
     const [, setLocation] = useLocation();
     const [showSuccess, setShowSuccess] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
-    // Here you would typically make an API call to register the user
+    // Here make an API call to register the user
     const handleSubmit = async (values, formikHelpers) => {
         setErrorMessage(null);
         setLoading(true);
 
         try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/register`, values);
             console.log('Registration successful:', values);
             showMessage('Registration successful!', 'success');
 
-            // Handle successful registration (e.g., show success message, redirect)
             setShowSuccess(true);
             formikHelpers.resetForm();
-            setLocation("/");
+            setLocation("/=");
 
         } catch (error) {
-            // Handle registration error (e.g., show error message)
             console.log(values)
             console.log("Registration failed:", error);
             showMessage('Registration failed. Please try again.', 'error');
@@ -75,7 +73,6 @@ export default function RegisterPage() {
                 >
                     {(formik) => (
                         <Form>
-                            <div>
                                 <div className="mb-3">
                                     <label htmlFor="name" className="form-label">
                                         Name
@@ -104,9 +101,8 @@ export default function RegisterPage() {
                                     {formik.errors.email && formik.touched.email ? (
                                         <div className="text-danger">{formik.errors.email}</div>
                                     ) : null}
-                                </div></div>
+                                </div>
 
-                            <div>
                                 <div className="mb-3 form-check-inline">
                                     <label className="form-label">Salutation</label>
                                     <div>
@@ -204,9 +200,7 @@ export default function RegisterPage() {
                                         <div className="text-danger">{formik.errors.country}</div>
                                     ) : null}
                                 </div>
-                            </div>
 
-                            <div>
                                 <div className="mb-3">
                                     <label htmlFor="password" className="form-label">
                                         Password
@@ -235,7 +229,7 @@ export default function RegisterPage() {
                                     {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
                                         <div className="text-danger">{formik.errors.confirmPassword}</div>
                                     ) : null}
-                                </div></div>
+                                </div>
 
                             <div className="mb-4">
                                 <button
@@ -243,12 +237,6 @@ export default function RegisterPage() {
                                     className="btn btn-primary"
                                     disabled={formik.isSubmitting}
                                 >Register</button>
-
-                                {loading && (
-                                    <div className="spinner-border text-primary ms-2" role="status">
-                                        <span className="visually-hidden">Loading...</span>
-                                    </div>
-                                )}
                             </div>
                         </Form>
                     )}

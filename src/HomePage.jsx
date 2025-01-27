@@ -61,9 +61,8 @@ export default function HomePage() {
             <header className="bg-primary text-white text-center py-5">
                 <div className="container">
                     <h1 className="display-4">Ring in the New Year with our delicious snacks!</h1>
-                    <p className="lead">Discover amazing products at unbeatable prices!</p>
                     <a onClick={() => setLocation('/products')}
-                        className={`btn btn-light btn-lg nav-link ${location === '/products' ? 'active' : ''}`}
+                        className={`btn btn-light btn-lg ${location === '/products' ? 'active' : ''}`}
                         role="button">
                         Shop Now</a>
                 </div>
@@ -78,103 +77,3 @@ export default function HomePage() {
         </>
     )
 }
-
-    // TODO: move featured products into carousel
-    
-    //     return (
-    //         <>
-    //             {/* Carousel Section */}
-    //             <main className="container my-5">
-    //                 <div id="carouselExampleCaptions" className="carousel slide">
-    //                     <div className="carousel-indicators">
-    //                         {/* First indicator for the header slide */}
-    //                         <button
-    //                             type="button"
-    //                             data-bs-target="#carouselExampleCaptions"
-    //                             data-bs-slide-to="0"
-    //                             className="active"
-    //                             aria-current="true"
-    //                             aria-label="Slide 1"
-    //                         ></button>
-
-    //                         {/* Create additional indicators for featured products */}
-    //                         {featuredProducts.map((product, index) => (
-    //                             <button
-    //                                 key={product.id}
-    //                                 type="button"
-    //                                 data-bs-target="#carouselExampleCaptions"
-    //                                 data-bs-slide-to={index + 1}
-    //                                 aria-label={`Slide ${index + 2}`}
-    //                             ></button>
-    //                         ))}
-    //                     </div>
-
-    //                     <div className="carousel-inner">
-    //                         {/* First carousel item - Header Content */}
-    //                         <div className="carousel-item active">
-    //                             <img
-    //                                 src="path_to_header_image.jpg"
-    //                                 className="d-block w-100"
-    //                                 alt="Header Slide"
-    //                             />
-    //                             <div className="carousel-caption d-none d-md-block">
-    //                                 <h1 className="display-4">Welcome to E-Shop</h1>
-    //                                 <h2 className="lead">Discover amazing products at unbeatable prices!</h2>
-    //                                 <a href="#" className="btn btn-light btn-lg">
-    //                                     Shop Now
-    //                                 </a>
-    //                             </div>
-    //                         </div>
-
-    //                         {/* Render the featured products as carousel items */}
-    //                         {featuredProducts.map((product, index) => (
-    //                             <div
-    //                                 key={product.id}
-    //                                 className={`carousel-item ${index === 0 ? "active" : ""}`}
-    //                             >
-    //                                 <img
-    //                                     src={product.image}
-    //                                     className="d-block w-100"
-    //                                     alt={product.name}
-    //                                 />
-    //                                 <div className="carousel-caption d-none d-md-block">
-    //                                     <h2>{product.name}</h2>
-    //                                     <h3>{product.description}</h3>
-    //                                     <a href="#" className="btn btn-light btn-lg">
-    //                                         Add to Cart
-    //                                     </a>
-    //                                 </div>
-    //                             </div>
-    //                         ))}
-    //                     </div>
-
-    //                     {/* Carousel Controls */}
-    //                     <button
-    //                         className="carousel-control-prev"
-    //                         type="button"
-    //                         data-bs-target="#carouselExampleCaptions"
-    //                         data-bs-slide="prev"
-    //                     >
-    //                         <span
-    //                             className="carousel-control-prev-icon"
-    //                             aria-hidden="true"
-    //                         ></span>
-    //                         <span className="visually-hidden">Previous</span>
-    //                     </button>
-    //                     <button
-    //                         className="carousel-control-next"
-    //                         type="button"
-    //                         data-bs-target="#carouselExampleCaptions"
-    //                         data-bs-slide="next"
-    //                     >
-    //                         <span
-    //                             className="carousel-control-next-icon"
-    //                             aria-hidden="true"
-    //                         ></span>
-    //                         <span className="visually-hidden">Next</span>
-    //                     </button>
-    //                 </div>
-    //             </main>
-    //         </>
-    //     );
-    // }

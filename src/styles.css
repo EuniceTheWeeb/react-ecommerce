@@ -12,14 +12,12 @@ img {
   height: auto;
 }
 
-/* TODO: different types of alerts (success, failed) */
 .flash-alert {
     animation: fadeOut 2s ease forwards;
     position: fixed;
     top: 20px;
     z-index: 10;
     padding: 12px;
-
     min-width: auto;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
@@ -27,19 +25,6 @@ img {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     opacity: 1;
   }
-
-/*   
-  .flash-alert.success {
-    background-color: #28a745;
-  }
-  
-  .flash-alert.danger {
-    background-color: #dc3545;
-  }
-  
-  .flash-alert.info {
-    background-color: #17a2b8;
-  } */
   
   @keyframes fadeOut {
     0% { opacity: 1; }

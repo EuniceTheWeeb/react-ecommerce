@@ -1,26 +1,29 @@
 import { atom, useAtom } from 'jotai';
+import axios from 'axios';
 import Immutable from "seamless-immutable";
+import { useEffect, useRef } from "react";
+import { useJwt } from "./UserStore";
 
-const initialCart = Immutable([
-    {
-        "id": 1,
-        "product_id": 1,
-        "quantity": 3,
-        "productName": "Pineapple Tarts (Bottle)",
-        "price": 21.90,
-        "imageUrl": "pineappleTarts.jpg",
-        "description": "Our pineapple tarts melt in your mouth with the perfect balance of sweet and tangy."
-    },
-]);
-
-// Create an atom for the cart
+const initialCart = Immutable([]);
 export const cartAtom = atom(initialCart);
+export const cartLoadingAtom = atom(false);
 
-// Custom hook for cart operations
 export const useCart = () => {
+  const isInitialLoad= useRef(true);
     const [cart, setCart] = useAtom(cartAtom);
+    const [isLoading, setIsLoading] = useAtom(cartLoadingAtom);
+    const { getJwt } = useJwt();
 
-    // Function to calculate the total price of items in the cart
+    useEffect(() => {
+		    
+    
+      const debounceTimeout = setTimeout(() => {
+          updateCart();
+      }, 500);
+
+      return () => clearTimeout(debounceTimeout); 
+  }, [cart]);
+
     const getCartTotal = () => {
         return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
     };
@@ -49,7 +52,6 @@ export const useCart = () => {
           const existingItemIndex = currentCart.findIndex(item => item.product_id === product_id);
           if (existingItemIndex !== -1) {
     
-            // check if the quantity will be reduced to 0 or less, if so remove the item
             if (quantity < 0) {
               return currentCart.filter(item => item.product_id !== product_id);
             } else {                      
@@ -66,11 +68,57 @@ export const useCart = () => {
         });
       }
 
+      const fetchCart = async () => {
+        const jwt = getJwt();
+        setIsLoading(true);
+        try {
+            const response = await axios.get(
+                `${import.meta.env.VITE_API_URL}/api/cart`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                }
+            );
+            setCart(Immutable(response.data));
+        } catch (error) {
+            console.error("Error fetching cart:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const updateCart = async () => {
+      const jwt = getJwt();
+      setIsLoading(true);
+      try {
+          const updatedCartItems = cart.map((item) => ({
+              product_id: item.product_id,
+              quantity: item.quantity,
+          }));
+          await axios.put(
+              `${import.meta.env.VITE_API_URL}/api/cart`,
+              { cartItems: updatedCartItems },
+              {
+                  headers: {
+                      Authorization: `Bearer ${jwt}`,
+                  },
+              }
+          );
+      } catch (error) {
+          console.error("Error updating cart:", error);
+      } finally {
+          setIsLoading(false);
+      }
+  };
+
     return {
         cart,
         getCartTotal,
         addToCart,
         modifyQuantity,
-        removeFromCart
+        removeFromCart,
+        fetchCart,
+        updateCart
     };
 };

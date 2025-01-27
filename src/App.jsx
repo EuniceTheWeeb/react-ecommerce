@@ -2,30 +2,31 @@ import React, {useEffect, useState} from 'react';
 import { Route, Switch } from 'wouter';
 import './styles.css';
 import { useFlashMessage } from './FlashMessageStore';
-
+import UserLogin from "./UserLogin"
 import HomePage from './HomePage';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ProductsPage from './ProductsPage';
 import RegisterPage from './RegisterPage';
+import Profile from './Profile';
 import ShoppingCart from './ShoppingCart';
 
 export default function App() {
   const { getMessage, clearMessage } = useFlashMessage();
   const flashMessage = getMessage();
 
-  const [isVisible, setIsVisible] = useState(false); // State to track toast visibility
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (flashMessage.message) {
-      setIsVisible(true);  // Show the toast notification
+      setIsVisible(true); 
       const timer = setTimeout(() => {
-        setIsVisible(false); // Hide the toast after 10 seconds
-        clearMessage(); // Clear the flash message state
-      }, 10000);
+        setIsVisible(false); 
+        clearMessage(); 
+      }, 5000);
 
       return () => {
-        clearTimeout(timer);  // Cleanup timeout on unmount or message change
+        clearTimeout(timer);
       };
     }
   }, [flashMessage, clearMessage]);
@@ -45,6 +46,8 @@ export default function App() {
       <Switch>
         <Route path="/" component={HomePage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/login" component={UserLogin} />
+        <Route path="/profile" component={Profile} />
         <Route path="/products" component={ProductsPage} />
         <Route path="/cart" component={ShoppingCart} />
       </Switch>

@@ -5,30 +5,13 @@ export default function Navbar() {
   const [isNavbarShowing, setNavbarShowing] = useState(false);
   const [location] = useLocation();
 
-  // Toggle the collapse state
   const toggleNavbar = () => {
     setNavbarShowing(!isNavbarShowing);
   };
 
   useEffect(() => {
-    setNavbarShowing(false); // Collapse the navbar when the route changes
+    setNavbarShowing(false);
   }, [location]);
-
-  // Sync the collapse state with screen size
-  // useEffect(() => {
-  //   const syncNavbarState = () => {
-  //     setNavbarShowing(window.innerWidth >= 992); // Show if larger than 992px, otherwise don't show
-  //   };
-
-  // syncNavbarState(); 
-  // Run on mount to set the initial state
-
-  // Listen for window resize events
-  // window.addEventListener('resize', syncNavbarState);
-
-  // Cleanup the listener on unmount
-  //   return () => window.removeEventListener('resize', syncNavbarState);
-  // }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -61,14 +44,26 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link href="/login" className={`nav-link ${location === '/login' ? 'active' : ''}`}>
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                href="/profile"
+                className={`nav-link ${location === '/profile' ? 'active' : ''}`}>
+                Profile
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link href="/products" className={`nav-link ${location === '/products' ? 'active' : ''}`}>
                 Products
               </Link>
             </li>
-              <li className="nav-item">
-              <Link 
-              href="/cart" 
-              className={`nav-link ${location === '/cart' ? 'active' : ''}`}>
+            <li className="nav-item">
+              <Link
+                href="/cart"
+                className={`nav-link ${location === '/cart' ? 'active' : ''}`}>
                 Cart
               </Link>
             </li>
@@ -76,6 +71,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-
   );
 }
